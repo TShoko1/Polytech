@@ -1,0 +1,7 @@
+git add *.cpp
+git add *.vcxproj
+git add *.sln
+git add *.filters
+git add *.user
+git commit -m "add lab 3.1"
+ git push https://github.com/Mospolytech-InfSec-221/labs-TimurBarateliia main

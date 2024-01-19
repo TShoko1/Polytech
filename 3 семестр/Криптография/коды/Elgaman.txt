@@ -1,0 +1,66 @@
+import random
+import math
+COUNT_RANDOMIZER=3
+class Elgamal:
+    def __init__(self):
+        self.alp = "qабвгдежзийклмнопрстуфхцчшщъыьэюя" #q - rubbish
+        self.simple = [37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89]
+        self.p = random.choice(self.simple)
+        print(f"\033[1;32;40mYOUR OPEN P KEY - {self.p}")
+        self.x = random.choice(range(10, self.p))
+        print(f"\u001b[31mYOUR SECRET X KEY - {self.x}")
+        self.g = random.choice(range(10, self.p))
+        print(f"\033[1;32;40mYOUR OPEN G KEY - {self.g}")
+        self.y = (self.g ** self.x) % self.p
+        print(f"\033[1;32;40mYOUR OPEN Y KEY - {self.y}")
+        self.k = []
+        while len(self.k) < COUNT_RANDOMIZER:
+            tmp = random.choice(range(11, 40))
+            if math.gcd(tmp, self.p - 1) == 1 and tmp not in self.k:
+                self.k.append(tmp)
+        print(f"\033[1;32;40mYOUR RANDOMIZERS - {self.k}")
+
+    def encypt(self, message: str):
+        message = message.replace('ё', 'е').replace(',', 'зпт').replace('.', 'тчк').replace(' ', '')
+        m = [self.alp.index(i) for i in message]
+        tmp = []
+        for ch in m:
+            r = random.choice(self.k)
+            ai = (self.g ** r) % self.p
+            bi = (self.y ** r * ch) % self.p
+            tmp += [ai, bi]
+        res = list(map(str, tmp))
+        for i in range(len(res)):
+            if len(res[i]) != 2:
+                res[i] = '0' + res[i]
+        result = ''.join(res)
+        assert len(result) == len(message) * 4
+        res = list(''.join(res))
+        q = []
+        while res:
+            if len(q) == 5:
+                print(''.join(q))
+                q = []
+            else:
+                q.append(res.pop(0))
+        print(''.join(q))
+        return result
+
+    def find_x(self, a, b, m) -> int:
+        if math.gcd(a, m) == 1:
+            a_inverse = pow(a, -1, m)
+            x = (a_inverse * b) % m
+            return x
+        else:
+            print("Уравнение не имеет решения, так как a и m не взаимно просты.")
+        return 0
+
+    def decrypt(self, message: str, key_p: int, key_x: int, key_g: int, key_y: int):
+        for i in range(0, len(message), 4):
+            print(self.alp[self.find_x(int(message[i] + message[i + 1]) ** key_x, int(message[i + 2] + message[i + 3]), key_p)], end='')
+
+
+if __name__ == "__main__":
+    p = Elgamal()
+    encypted_message = p.encypt('не все те повара, что с длинными ножами ходят.')
+    p.decrypt(encypted_message, p.p, p.x, p.g, p.y)

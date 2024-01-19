@@ -1,0 +1,8 @@
+не должно быть 2 одинаковых названия(например папка MyServ и проект MyServ при запуске)
+Dockerfile должен быть там, где начинаешь запускать Powershell
+
+docker build . -t exam
+docker run -p 33333:33333 (название напр exam)
+должно быть server is start
+docker tag exam timur232/(напр exam)
+docker push timur232/(напр exam)

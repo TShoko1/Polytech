@@ -1,0 +1,15 @@
+создание репозитория и ветки 
+git init
+git add .
+git checkout -b (название ветки)
+git commit -m "..."
+git remote add origin ссылка на репоз
+git push -u origin (назв ветки)
+
+
+если добавить файлы в существующий
+git add ./* 
+git commit -m "..."
+git push
+
+

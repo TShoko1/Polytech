@@ -1,0 +1,94 @@
+ПРИМЕР (31^511mod1517)
+
+import math
+
+class MyClass:
+    def find_x(self, a, b, m) -> int:
+        if math.gcd(a, m) == 1:
+            a_inverse = pow(a, -1, m)
+            x = (a_inverse * b) % m
+            return x
+        else:
+            print("Уравнение не имеет решения, так как a и m не взаимно просты.")
+        return 0
+
+# Создаем экземпляр класса
+my_object = MyClass()
+
+# Задаем параметры уравнения
+a = 27
+b = 1
+m = 1517
+
+# Вызываем функцию для решения уравнения
+result = my_object.find_x(a, b, m)
+
+print("Решение неравенства:", result)
+
+# Вычисляем 31^511 mod 1517
+power_result = pow(899, 31, 1517)
+print("Результат выражения 31^511 mod 1517:", power_result)
+
+
+
+
+
+
+
+ПРИМЕР (31D=1mod1440)
+import math
+
+class MyClass:
+    def find_x(self, a, b, m) -> int:
+        if math.gcd(a, m) == 1:
+            a_inverse = pow(a, -1, m)
+            x = (a_inverse * b) % m
+            return x
+        else:
+            print("Уравнение не имеет решения, так как a и m не взаимно просты.")
+        return 0
+
+# Создаем экземпляр класса
+my_object = MyClass()
+
+# Задаем параметры уравнения
+a = 41
+b = 1
+m = 1932
+
+# Вызываем функцию для решения уравнения
+result = my_object.find_x(a, b, m)
+
+print("Решение неравенства:", result)
+
+
+
+
+
+
+ПРИМЕР (33D=27-37x41mod46)
+import math
+
+class EquationSolver:
+    def find_D(self, a, b, m) -> int:
+        if math.gcd(a, m) == 1:
+            a_inverse = pow(a, -1, m)
+            D = (a_inverse * b) % m
+            return D
+        else:
+            print("Уравнение не имеет решения, так как a и m не взаимно просты.")
+        return 0
+
+# Создаем экземпляр класса
+solver = EquationSolver()
+
+# Задаем параметры уравнения
+a = 33
+b = (31 - 19 * 18)  # Уточненное значение b
+m = 40
+
+# Вызываем функцию для нахождения D
+result_D = solver.find_D(a, b, m)
+
+print("Значение D:", result_D)
+

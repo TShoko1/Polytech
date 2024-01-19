@@ -1,0 +1,54 @@
+class Shenon:
+    def __init__(self, message: str, T0: int, a: int, c: int):
+        self.message = message.replace('ё', 'е').replace(' ', '').replace('.', 'тчк').replace(',', 'зпт').lower()
+        self.T0 = T0
+        self.a = a
+        self.c = c
+        self.alp = "qабвгдежзийклмнопрстуфхцчшщъыьэюя" # index start from 1 {q - rubbish}
+        self.gamma = [self.T0]
+        for _ in range(len(self.message)):
+            self.gamma.append((self.a * self.gamma[-1] + self.c) % 32)
+        self.gamma.pop(0)
+        print(f"GAMMA: {self.gamma}")
+
+    def standart_message(self, message: list[int]) -> None:
+        res = (list(map(str, message)))
+        tmp = []
+        for i in res:
+            if len(i) != 2:
+                tmp.append('0' + i)
+            else:
+                tmp.append(i)
+        tmp = list(''.join(tmp))
+        q = ""
+        while tmp:
+            if len(q) == 5:
+                print(q)
+                q = ""
+            q += tmp.pop(0)
+        print(q)
+
+
+    def encode(self) -> list[int]:
+        tmp = []
+        for i in range(len(self.message)):
+            t = self.alp.index(self.message[i]) + self.gamma[i] - 32 if (self.alp.index(self.message[i]) + self.gamma[i]) >= 32 else self.alp.index(self.message[i]) + self.gamma[i]
+            tmp.append(t)
+        return tmp
+
+    def decode(self, encode_message: list[int]) -> None:
+        print("DECODE: ", end="")
+        res = ""
+        for i in range(len(encode_message)):
+            t = encode_message[i] - self.gamma[i] + 32 if (encode_message[i] - self.gamma[i]) < 0 else encode_message[i] - self.gamma[i]
+
+            if t == 0:
+                t = 32
+            res += self.alp[t]
+        print(res.replace('тчк', '.').replace('зпт', ', '))
+
+
+
+sh = Shenon("Не всякий, кто читает, в чтении силу знает.", 2, 5, 5)
+sh.standart_message(sh.encode())
+sh.decode(sh.encode())

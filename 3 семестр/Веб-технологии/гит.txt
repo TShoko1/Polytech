@@ -1,0 +1,28 @@
+ggit надо установить сам git
+git init - инициализировать
+git config --local user.email "barateliatimura@gmail.com"
+git config --local user.name "имя на гите"
+git add -A
+git commit -m "Первый коммит"
+git remote add origin https://github.com/TimurBarateliia/Web.git
+git push origin main(или master)
+
+
+git залить лабы
+git add *
+git commit ""
+git push
+
+в puTTy
+std
+cd Web
+git pull
+
+
+
+
+репозиторий скопировать на сервер в командной строке puTTy
+git clone (адресс реп)
+
+
+затем добавить домен 
